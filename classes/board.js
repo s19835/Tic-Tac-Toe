@@ -43,4 +43,18 @@ export default class Board {
         //otherwise
         return false;
     }
+    insert(symbol, position) {
+        if (![0, 1, 2, 3, 4, 5, 6, 7, 8].includes(position)) throw new Error(`Cell ${position} does not exist!`);
+        if (!['X', 'O'].includes(symbol)) throw new Error(`Invalid Symbol ${symbol}, The symbol can only be x or o!`);
+        if (this.state[position]) return false;
+        this.state[position] = symbol;
+        return true;
+    }
+    getAvailableMoves() {
+        const moves = [];
+        this.state.forEach((cell, index) => {
+            if (!cell) moves.push(index);
+        })
+        return moves;
+    }
 }
