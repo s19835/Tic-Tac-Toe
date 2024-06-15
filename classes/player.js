@@ -11,7 +11,8 @@ export default class Player {
         if (board.isTerminal() || depth == this.maxDepth) {
             if (board.isTerminal().winner === 'X') return 100 - depth;
             else if (board.isTerminal().winner === 'O') return -100 + depth;
-        } return 0;
+            return 0;
+        }
 
         if (maximizing) {
             let best = -100;
