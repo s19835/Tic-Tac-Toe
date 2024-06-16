@@ -24,6 +24,11 @@ export default class Player {
                 //now get the best move from current board
                 const nodeVlaue = this.getBestMove(child, false, callback, depth+1)
                 best = Math.max(best, nodeVlaue);
+
+                if (depth == 0) {
+                    const moves = this.nodesMap.has(nodeVlaue) ? `${this.nodesMap.get(nodeVlaue)}, ${index}` : index;
+                    this.nodesMap.set(nodeVlaue, moves);
+                }
             });
         }
     }
