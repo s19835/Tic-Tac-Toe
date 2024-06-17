@@ -1,4 +1,5 @@
 import Board from "./classes/board.js";
+import Player from "./classes/player.js";
 
 const board = new Board(["X", "O", "X", "", "O", "O", "O", "X", ""]);
 
@@ -14,3 +15,6 @@ console.log(board.insert('X', 3));
 console.log(board.isTerminal());
 
 board.printFormattedBoard();
+const p = new Player();
+console.log(p.getBestMove(board));
+console.log(p.nodesMap)
