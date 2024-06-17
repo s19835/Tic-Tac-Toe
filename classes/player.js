@@ -30,6 +30,46 @@ export default class Player {
                     this.nodesMap.set(nodeVlaue, moves);
                 }
             });
+            if (depth == 0) {
+                if (typeof this.nodesMap.best == 'string') {
+                    const arr = this.nodesMap.get(best).split(',');
+                    const rand = Math.floor(Math.random() * arr.length);
+                    const ret = arr[rand];
+                } else {
+                    ret = this.nodesMap.get(best)
+                }
+                callback(ret);
+                return ret;
+            }
+            return best;
+        }
+        if (!maximizing) {
+            let best = 100;
+            board.getAvailableMoves().forEach(index => {
+                const child = new board([...board]);
+                child.insert("O", index);
+                
+                const nodeVlaue = this.getBestMove(child, false, callback, depth+1)
+                best = Math.min(best, nodeVlaue);
+
+                if (depth == 0) {
+                    const moves = this.nodesMap.has(nodeVlaue) ? `${this.nodesMap.get(nodeVlaue)}, ${index}` : index;
+                    this.nodesMap.set(nodeVlaue, moves);
+                }
+            });
+            if (depth == 0) {
+                let returnValue;
+                if (typeof this.nodesMap.get(best) == 'string') {
+                    const arr = this.nodesMap.get(best).split(',');
+                    const rand = Math.floor(Math.random() * arr.length);
+                    returnValue = this.nodesMap.get(best);
+                } else {
+                    returnValue = this.nodesMap.get(best);
+                }
+                callback(returnValue);
+                return returnValue;
+            }
+            return best;
         }
     }
 }
